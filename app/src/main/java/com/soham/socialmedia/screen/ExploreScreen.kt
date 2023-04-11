@@ -14,6 +14,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TileMode
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.soham.socialmedia.components.PostSingleRow
@@ -26,7 +27,7 @@ fun ExploreScreen(){
         modifier = Modifier
             .fillMaxHeight()
             .fillMaxWidth()
-            .padding(0.dp,0.dp,0.dp,58.dp)
+            .padding(0.dp, 0.dp, 0.dp, 58.dp)
             .background(
                 Brush.linearGradient(
                     0.0f to BackgroundGradient1,
@@ -56,7 +57,7 @@ fun ExploreScreen(){
 }
 
 @Composable
-fun SortingChips(){
+private fun SortingChips(){
     var enabled1 by remember{
         mutableStateOf(false)
     }
@@ -70,7 +71,7 @@ fun SortingChips(){
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .padding(22.dp,0.dp,22.dp, 12.dp),
+            .padding(22.dp, 0.dp, 22.dp, 12.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Button(
@@ -148,4 +149,10 @@ private fun PostsList(list :List<Post>){
             PostSingleRow(post)
         }
     }
+}
+
+@Preview
+@Composable
+fun ExploreScreenPreview(){
+    ExploreScreen()
 }

@@ -130,7 +130,7 @@ fun PostSingleRow(post: Post){
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(180.dp)
+                    .height(300.dp)
                     .padding(16.dp)
                     .clip(RoundedCornerShape(20.dp))
             )
