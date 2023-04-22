@@ -28,14 +28,16 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.soham.socialmedia.GlobalConstants
 import com.soham.socialmedia.ui.theme.*
 
 @Composable
 fun BottomNavigation(){
     val navController = rememberNavController()
+    GlobalConstants.bottomNavController = navController
     Scaffold(
         bottomBar = { BottomBar(navController = navController) }
-    ) {
+    ) {it.calculateBottomPadding()
         BottomNavigationGraph(navController = navController)
     }
 }

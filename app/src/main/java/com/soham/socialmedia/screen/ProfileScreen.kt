@@ -25,11 +25,13 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.google.firebase.auth.FirebaseAuth
 import com.soham.socialmedia.R
 import com.soham.socialmedia.ui.theme.*
 
 @Composable
 fun ProfileScreen(){
+    val user = FirebaseAuth.getInstance().currentUser
     Column(
         modifier = Modifier
             .fillMaxHeight()
@@ -78,7 +80,7 @@ fun ProfileScreen(){
                     .padding(22.dp, 0.dp)
             ) {
                 Text(
-                    text = "Sohamp1003",
+                    text = user!!.displayName.toString(),
                     fontSize = 24.sp,
                     color = Color.White
                 )

@@ -18,7 +18,7 @@ fun BottomNavigationGraph(
             ExploreScreen()
         }
         composable(route = BottomBarScreen.AddPost.route){
-            AddPostScreen()
+            AddPostScreen(navController = navController)
         }
         composable(route = BottomBarScreen.Profile.route){
             ProfileScreen()

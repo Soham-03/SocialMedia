@@ -49,9 +49,9 @@ fun ExploreScreen(){
         )
         SortingChips()
         PostsList(list = listOf(
-            Post("GGWP","","asd","",""),
-            Post("GGWP","","asd","",""),
-            Post("GGWP","","asd","",""),
+            Post("GGWP","","asd"),
+            Post("GGWP","","asd"),
+            Post("GGWP","","asd"),
         ))
     }
 }

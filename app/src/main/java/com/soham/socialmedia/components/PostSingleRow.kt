@@ -64,7 +64,7 @@ fun PostSingleRow(post: Post){
                         .clip(CircleShape)
                 )
                 Text(
-                    text = "Jane Cooper",
+                    text = post.title,
                     color = Color.White,
                     fontSize = 24.sp,
                     modifier = Modifier
@@ -116,7 +116,7 @@ fun PostSingleRow(post: Post){
                     )
                 }
                 Text(
-                    text = "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
+                    text = post.content,
                     color = Color.White,
                     fontSize = 20.sp,
                     modifier = Modifier
@@ -142,5 +142,5 @@ fun PostSingleRow(post: Post){
 @Preview
 @Composable
 fun preview(){
-    PostSingleRow(post = Post("GGWP","","asd","",""))
+    PostSingleRow(post = Post("GGWP","asdasdasdasd","asd"))
 }
