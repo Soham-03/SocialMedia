@@ -14,6 +14,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.soham.socialmedia.navigation.NavigationGraph
 import com.soham.socialmedia.navigation.Screens
 import com.soham.socialmedia.ui.theme.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +31,9 @@ class MainActivity : ComponentActivity() {
                     val user = FirebaseAuth.getInstance().currentUser
                     if(user!=null){
                        com.soham.socialmedia.navigation.BottomNavigation()
+                        LaunchedEffect(key1 = true, key2 = true, key3 = true) {
+                            com.soham.socialmedia.firebase.FirebaseAuth().getUsers()
+                        }
                     }
                     else{
                         NavigationGraph()

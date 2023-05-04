@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Social Media</string>
+    <string name="title_activity_show_interested_users">ShowInterestedUsers</string>
 </resources>

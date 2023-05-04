@@ -11,4 +11,6 @@ sealed class Screens(
     )
     object MainScreen: Screens("MainScreen",
     )
+    object ShowInterestedUsers: Screens("InterestedUsers"
+    )
 }

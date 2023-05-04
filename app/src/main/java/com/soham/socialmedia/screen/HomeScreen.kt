@@ -26,11 +26,7 @@ import com.soham.socialmedia.model.Post
 import com.soham.socialmedia.ui.theme.*
 
 @Composable
-fun HomeScreen(){
-    val db = FirebaseFirestore.getInstance()
-    val auth = FirebaseAuth.getInstance()
-    val listOfPosts = remember{mutableStateListOf<Post?>()}
-
+fun HomeScreen() {
     Column(
         modifier = Modifier
             .fillMaxHeight()
@@ -53,80 +49,30 @@ fun HomeScreen(){
             text = "Social Media",
             color = Color.White,
             fontSize = 28.sp,
-            modifier = Modifier.padding(22.dp,22.dp,22.dp,0.dp)
+            modifier = Modifier.padding(22.dp, 22.dp, 22.dp, 0.dp)
         )
-
-//        db.collection("users").document(auth.currentUser!!.uid).collection("posts").get()
-//            .addOnSuccessListener { queryDocumentSnapshots ->
-//                // after getting the data we are
-//                // calling on success method
-//                // and inside this method we are
-//                // checking if the received query
-//                // snapshot is empty or not.
-//                if (!queryDocumentSnapshots.isEmpty) {
-//                    // if the snapshot is not empty we are
-//                    // hiding our progress bar and adding
-//                    // our data in a list.
-//                    // loadingPB.setVisibility(View.GONE)
-//                    val list = queryDocumentSnapshots.documents
-//                    for (d in list) {
-//                        // after getting this list we are passing that list
-//                        // to our object class.
-//                        val post: Post? = d.toObject(Post::class.java)
-//                        // and we will pass this object class
-//                        // inside our arraylist which we have
-//                        // created for list view.
-//                        listOfPosts.add(post)
-//
-//                    }
-//                } else {
-//
-//                }
-//            }
-//            // if we don't get any data
-//            // or any error we are displaying
-//            // a toast message that we donot get any data
-//            .addOnFailureListener {
-////                Toast.makeText(
-////                    ,
-////                    "Fail to get the data.",
-////                    Toast.LENGTH_SHORT
-////                ).show()
-//            }
-        val list = com.soham.socialmedia.firebase.FirebaseAuth().getMyPosts()
-        LazyColumn(
-        contentPadding = PaddingValues(22.dp),
-        verticalArrangement = Arrangement.spacedBy(22.dp),
-        modifier = Modifier
-            .fillMaxHeight()
-            .fillMaxWidth()
-    ){
-        itemsIndexed(list){index,post->
-            PostSingleRow(post)
-        }
+        PostsList()
     }
 }
 
-//@Composable
-//private fun PostsList(list:mutable){
-////    LazyColumn(
-////        contentPadding = PaddingValues(22.dp),
-////        verticalArrangement = Arrangement.spacedBy(22.dp),
-////        modifier = Modifier
-////            .fillMaxHeight()
-////            .fillMaxWidth()
-////    ){
-////        itemsIndexed(list){index,post->
-////            PostSingleRow(post)
-////        }
-////        itemsIndexed(items = list){post->
-////            PostSingleRow(post)
-////        }
-//    }
-}
+    @Composable
+    private fun PostsList() {
+        val list = com.soham.socialmedia.firebase.FirebaseAuth().getMyPosts()
+        LazyColumn(
+            contentPadding = PaddingValues(22.dp),
+            verticalArrangement = Arrangement.spacedBy(22.dp),
+            modifier = Modifier
+                .fillMaxHeight()
+                .fillMaxWidth()
+        ) {
+            itemsIndexed(list) { index, post ->
+                PostSingleRow(post, LocalContext.current)
+            }
+        }
+    }
 
-@Preview
-@Composable
-fun PreviewHomeScreen(){
-    HomeScreen()
-}
+    @Preview
+    @Composable
+    fun PreviewHomeScreen() {
+        HomeScreen()
+    }

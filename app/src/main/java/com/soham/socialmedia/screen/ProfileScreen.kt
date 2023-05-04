@@ -4,8 +4,11 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.gestures.ScrollableState
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -19,6 +22,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontStyle
@@ -27,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.firebase.auth.FirebaseAuth
 import com.soham.socialmedia.R
+import com.soham.socialmedia.components.PostSingleRow
 import com.soham.socialmedia.ui.theme.*
 
 @Composable
@@ -163,29 +168,19 @@ fun ProfileScreen(){
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun PostsGrid(){
-    LazyVerticalGrid(
-        columns = GridCells.Fixed(2),
+    val list = com.soham.socialmedia.firebase.FirebaseAuth().getMyPosts()
+    LazyColumn(
         verticalArrangement = Arrangement.spacedBy(12.dp),
-        horizontalArrangement = Arrangement.spacedBy(12.dp),
         modifier = Modifier
             .padding(22.dp)
-            .height(480.dp),
-        content = {
-            items(100){
-                Image(
-                    painter = painterResource(id = R.drawable.ic_launcher_background),
-                    contentDescription = "My Posts",
-                    modifier = Modifier
-                        .size(150.dp)
-                        .clip(RoundedCornerShape(12.dp)),
-                    contentScale = ContentScale.FillBounds
-                )
-            }
+            .height(600.dp)
+    ){
+        items(list){post->
+            PostSingleRow(post = post, context = LocalContext.current)
         }
-    )
+    }
 }
 
 @Preview

@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -130,5 +131,5 @@ fun RowScope.AddItem(
 @Preview
 @Composable
 fun BottomNavPreview(){
-    BottomNavigation()
+//    BottomNavigation(null)
 }
