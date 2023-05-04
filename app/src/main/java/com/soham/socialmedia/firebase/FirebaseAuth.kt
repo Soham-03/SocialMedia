@@ -303,10 +303,10 @@ class FirebaseAuth() {
         val hashMap = HashMap<String,String>()
         hashMap["postCollabInterests"] = updatedInterestsNumber
         if(post.interestedUsers!!.isEmpty()){
-            hashMap["interestedUsers"] = FirebaseAuth.getInstance().currentUser!!.uid
+            hashMap["interestedUsers"] = auth.currentUser!!.displayName!!
         }
         else{
-            hashMap["interestedUsers"] = post.interestedUsers.joinToString()+", "+FirebaseAuth.getInstance().currentUser!!.uid
+            hashMap["interestedUsers"] = post.interestedUsers.joinToString()+", "+auth.currentUser!!.displayName
         }
         db.collection("users").document(post.ownerUid).collection("posts")
             .document(post.postId).update(hashMap as Map<String, Any>)

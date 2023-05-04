@@ -85,7 +85,7 @@ fun PostSingleRow(post: Post,context: Context){
             elevation = 0.dp
         ) {
             val commentImage:Int = if(!commentClicked){
-                R.drawable.ic_comment
+                R.drawable.ic_comment_filled
             } else{
                 R.drawable.ic_comment_filled
             }
@@ -110,7 +110,7 @@ fun PostSingleRow(post: Post,context: Context){
                 ){
 
                     Image(
-                        painter = painterResource(id = R.drawable.ic_launcher_background),
+                        painter = painterResource(id = R.drawable.ic_pfp_placeholder),
                         contentDescription = "User's profile Image",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
@@ -402,7 +402,7 @@ fun PostSingleRow(post: Post,context: Context){
                 ){
 
                     Image(
-                        painter = painterResource(id = R.drawable.ic_launcher_background),
+                        painter = painterResource(id = R.drawable.ic_pfp_placeholder),
                         contentDescription = "User's profile Image",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier

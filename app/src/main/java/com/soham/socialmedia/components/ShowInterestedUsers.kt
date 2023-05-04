@@ -40,9 +40,12 @@ private fun ShowInterestedUsers(){
         ){
             items(GlobalConstants.currentSelectedCollab.interestedUsers!!.size){index: Int ->
                 val str = GlobalConstants.currentSelectedCollab.interestedUsers!![index]
-                Row(){
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ){
                     Image(
-                        painter = painterResource(id = R.drawable.ic_launcher_background),
+                        painter = painterResource(id = R.drawable.ic_pfp_placeholder),
                         contentDescription = "User's profile Image",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier

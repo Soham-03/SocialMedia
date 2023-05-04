@@ -59,6 +59,7 @@ import com.soham.socialmedia.ui.theme.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.io.File
 import java.io.IOException
 
 private var currentChip = 1
@@ -442,6 +443,7 @@ fun AddPostScreen(navController: NavController){
                             hashmap["likedByMe"] = "false"
                             hashmap["dislikedByMe"] = "false"
                             if(selectedImageUris.isNotEmpty()){
+                                println(selectedImageUris)
                                 GlobalScope.launch {
                                     FirebaseAuth().uploadImagesToDbStorage(selectedImageUris,context)
                                     if(GlobalConstants.imagesToUploadLinks.isNotEmpty()){
@@ -449,19 +451,25 @@ fun AddPostScreen(navController: NavController){
                                         FirebaseAuth().addPostToDatabase(hashmap = hashmap, context = context, navController = navController)
                                     }
                                     else{
-                                        if(!TextUtils.isEmpty(selectedUri.toString())){
-                                            FirebaseAuth().uploadImagesToDbStorage(selectedUri!!,context)
-                                            if(GlobalConstants.imageToUploadLink!=null){
-                                                hashmap["postImages"] = GlobalConstants.imageToUploadLink!!
-                                                FirebaseAuth().addPostToDatabase(hashmap = hashmap, context = context, navController = navController)
-                                            }
-                                        }
-                                        else{
-                                            FirebaseAuth().addPostToDatabase(hashmap = hashmap, context = context, navController = navController)
-                                        }
                                     }
                                 }
                             }
+                            else{
+                                GlobalScope.launch {
+                                    println("Selected Image: "+selectedUri!!.path)
+                                    if(!TextUtils.isEmpty(selectedUri.toString())){
+                                        FirebaseAuth().uploadImagesToDbStorage(selectedUri!!,context)
+                                        if(GlobalConstants.imageToUploadLink!=null){
+                                            hashmap["postImages"] = GlobalConstants.imageToUploadLink!!
+                                            FirebaseAuth().addPostToDatabase(hashmap = hashmap, context = context, navController = navController)
+                                        }
+                                    }
+                                    else{
+//                                        FirebaseAuth().addPostToDatabase(hashmap = hashmap, context = context, navController = navController)
+                                    }
+                                }
+                            }
+
                         }
                         2 -> {
                             hashmap["type"] = "Doubts"
@@ -623,7 +631,7 @@ private fun getPhotos(): List<Uri> {
     cursor?.use {
         while (cursor.moveToNext() && photos.size < 10) {
             if(cursor.getColumnIndex(MediaStore.Images.Media.DATA)>0){
-                val uri = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)).toUri()
+                val uri = Uri.fromFile(File(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)).toUri().toString()))
                 try {
                     photos.add(uri)
                 } catch (e: IOException) {

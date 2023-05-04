@@ -37,8 +37,20 @@ fun CollabPostSingleRow(post:Post,context:Context){
     var progress by remember {
         mutableStateOf(0f)
     }
+    var buttonText by remember {
+        mutableStateOf("Show Interest")
+    }
+    var enabledStateButton by remember {
+        mutableStateOf(true)
+    }
+//    buttonText = if(interestedButtonState){
+//        "Show Interest"
+//    }
+//    else{
+//        "Interested"
+//    }
     progress = post.postCollabInterests.toFloat()/40
-    println("Interests:"+(post.postCollabInterests.toFloat()/40))
+//    println("Interests:"+(post.postCollabInterests.toFloat()/40))
     val size by animateFloatAsState(
         targetValue = progress,
         tween(
@@ -64,7 +76,7 @@ fun CollabPostSingleRow(post:Post,context:Context){
             fontSize = 22.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier
-                .padding(0.dp,18.dp)
+                .padding(0.dp, 18.dp)
                 .align(Alignment.CenterHorizontally)
         )
         Box(modifier = Modifier
@@ -94,12 +106,12 @@ fun CollabPostSingleRow(post:Post,context:Context){
                 .align(Alignment.End)
                 .clickable {
                     GlobalConstants.currentSelectedCollab = post
-                    val intent = Intent(context,ShowInterestedUsers::class.java)
+                    val intent = Intent(context, ShowInterestedUsers::class.java)
                     context.startActivity(intent)
                 }
         )
         Row(modifier = Modifier
-            .padding(0.dp,12.dp)
+            .padding(0.dp, 12.dp)
             .align(Alignment.CenterHorizontally)
         ){
             OutlinedButton(
@@ -107,14 +119,17 @@ fun CollabPostSingleRow(post:Post,context:Context){
                     val updatedInterests = (post.postCollabInterests.toInt()+1).toString()
                     FirebaseAuth().updateShowingInterests(post,updatedInterests)
                     progress = ((post.postCollabInterests.toInt()/40).toFloat())
+                    buttonText = "Interested"
+                    enabledStateButton = false
                 },
+                enabled = enabledStateButton,
                 border = BorderStroke(1.dp, ChipSelectedColor),
                 colors = ButtonDefaults.outlinedButtonColors(
                     backgroundColor = CardGradient1,
                     contentColor = ChipSelectedColor
                 )
             ) {
-                Text(text = "Show Interest")
+                Text(text = buttonText)
             }
         }
     }

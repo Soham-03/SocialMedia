@@ -71,7 +71,7 @@ fun ProfileScreen(){
             horizontalArrangement = Arrangement.SpaceBetween
         ){
             Image(
-                painter = painterResource(id = R.drawable.ic_launcher_background),
+                painter = painterResource(id = R.drawable.ic_pfp_placeholder),
                 contentDescription = "profile image",
                 modifier = Modifier
                     .size(64.dp)

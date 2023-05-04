@@ -65,7 +65,7 @@ fun CommentSingleRow(comment: Comment){
                 .background(CardGradient1)
         ){
             Image(
-                painter = painterResource(id = R.drawable.ic_launcher_background),
+                painter = painterResource(id = R.drawable.ic_pfp_placeholder),
                 contentDescription = "User's profile Image",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
@@ -134,7 +134,7 @@ fun CommentSingleRow(comment: Comment){
                                 .padding(22.dp,0.dp)
                         ){
                             Image(
-                                painter = painterResource(id = R.drawable.ic_launcher_background),
+                                painter = painterResource(id = R.drawable.ic_pfp_placeholder),
                                 contentDescription = "User's profile Image",
                                 contentScale = ContentScale.Crop,
                                 modifier = Modifier
